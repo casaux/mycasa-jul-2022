@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>myCASA - Identity verification</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="initial-scale=1">
+      <link rel="stylesheet" href="../mycasa-src-4.0/css/designsystem.min.css">
+      <link rel="stylesheet" href="../mycasa-src-4.0/css/casa.css">
+      <script type="text/javascript" src="../mycasa-src-4.0/js/designsystem.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src-4.0/js/jquery.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src-4.0/js/jquery.js"></script>
+      <script type="text/javascript">
+         /* page specific js */
+                  $(document).ready(function() {
+        $(".in-australia").on('input', function() {
+         
+         if($("input:radio[name='id-1']:checked").val()=="no"){
+         
+         $("#perm-res").css("display","block");
+            $("#choice").css("display","block");
+             $("#direct").css("display","none");
+   
+         } else {
+         
+         $("#perm-res").css("display","none");
+             $("#choice").css("display","none");
+             $("#direct").css("display","block");
+
+         }
+         
+         });
+     
+			 $("#validate a"). click(function(){
+				var radioValue = $("input[name='id']:checked"). val();
+				window.location.href=radioValue+".html";
+			 });
+				
+				 
+         });
+       
+          
+         
+      </script>
+     
+      </style>
+   </head>
+   <body class="live-demo au-body au-grid">
+      <main class="au-grid">
+        <div class="header">
+            <div class="container">
+               <div class="row">
+               
+               
+               
+                  <div class="logo au-body au-body--dark">
+                     <a href="index.html"><img src="../mycasa-src/img/CASALOGO-white-i.svg"></a>
+                  </div>
+                  <div class="casa-menu">
+                  	<div class="au-body au-body--dark">
+                        <a class="au-btn au-btn--dark" href="signed-out.html">Sign out</a>
+                     </div>
+                  
+                  
+                  
+                  
+                  </div>
+                  
+                  
+                  
+                  
+                  
+               </div>
+            </div>
+         </div> <div class="body"><div class="banner">
+				<div class=container>
+					<div class="row">
+					 <div class="col-xs-12">
+				This service is currently in beta, we encourage you to <a href="feedback.html">provide feedback</a>
+				</div>
+				</div>
+			</div>
+		</div>
+            <div class="container">
+               <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                  <ul class="au-link-list au-link-list--inline">
+                     <li><a href="welcome.html">myCASA</a></li>
+                     <li>Aviation reference number application</li>
+                  </ul>
+               </nav>
+              
+               <header class="au-header" role="banner">
+                  <h1 class="break desktop au-header-heading">Foreign passport details</span>
+                  </h1>
+                  <a class="au-direction-link" href="javascript:history.back()">
+					<span class="au-direction-link__arrow au-direction-link__arrow--left" aria-hidden="true"></span>Back
+					</a>
+               </header>
+               
+               
+               <div class="row">
+               	<div class="col-xs-12 col-md-12 col-lg-6">
+               
+                
+
+                    <div class="au-form-group">
+<label class="au-label">Are you currently in Australia:</label>
+                </div>
+                <div class="au-form-group">
+			<form action="#">
+<div class="au-control-input au-control-input--block">
+  <input class="au-control-input__input in-australia" type="radio" name="id-1" id="id-yes-1" value="yes">
+    <label class="au-control-input__text" for="id-yes-1">Yes</span></label>
+</div>
+<div class="au-control-input au-control-input--block">
+  <input class="au-control-input__input in-australia" type="radio" name="id-1" id="id-no-1" value="no">
+  <label class="au-control-input__text" for="id-no-1">No</label>
+</div>
+                </div>	
+                    
+                    <div id="perm-res" style="display: none">
+                     <div class="au-form-group">
+<label class="au-label">Are you an Australian permanent resident?:</label>
+                </div>
+                <div class="au-form-group">
+			<form action="#">
+<div class="au-control-input au-control-input--block">
+  <input class="au-control-input__input" type="radio" name="id" id="id-yes" value="id-passport-foreign-details">
+    <label class="au-control-input__text" for="id-yes">Yes</span></label>
+</div>
+<div class="au-control-input au-control-input--block">
+  <input class="au-control-input__input" type="radio" name="id" id="id-no" value="id-passport-foreign-upload">
+  <label class="au-control-input__text" for="id-no">No</label>
+</div>
+                         </div>
+                </div>	
+                    
+                   <!-- <div class="au-form-group">
+				<p>Please choose one of the following identification types to continue:</p>
+				
+                    </div>
+				
+				<form action="#">
+				
+				<label class="au-control-input casa-form-radio-selection" for="id-passport">
+					 <input class="au-control-input__input" type="radio"  name="id" id="id-passport" value="id-passport" checked>
+						<span class="au-control-input__text casa-label-guidance"> Australian passport<br />
+						<span class="form-text casa-form-guidance">(current or expired within three years but not cancelled)</span></span>
+				</label>
+					
+					
+				<label class="au-control-input casa-form-radio-selection" for="id-birth-certificate">
+					 <input class="au-control-input__input" type="radio"  name="id" id="id-birth-certificate" value="id-birth-certificate">
+						<span class="au-control-input__text casa-label-guidance"> Australian birth certificate<br />
+						<span class="form-text casa-form-guidance">(full certificate and not an extract)</span></span>
+
+				</label>
+					
+						
+					<label class="au-control-input casa-form-radio-selection" for="id-citizenship-certificate">
+					 <input class="au-control-input__input" type="radio"  name="id" id="id-citizenship-certificate" value="id-citizenship-certificate">
+						<span class="au-control-input__text casa-label-guidance"> Australian citizenship certificate<br />
+						<span class="form-text casa-form-guidance">(full certificate and not an extract)</span></span>
+
+				</label>
+					
+					
+					
+				<label class="au-control-input casa-form-radio-selection" for="id-passport-foreign">
+					 <input class="au-control-input__input" type="radio"  name="id" id="id-passport-foreign" value="id-passport-foreign">
+						<span class="au-control-input__text casa-label-guidance"> Foreign passport<br />
+						<span class="form-text casa-form-guidance">(current and not expired)</span></span>
+				</label>	
+					
+					
+				<label class="au-control-input casa-form-radio-selection" for="id-immicard">
+					 <input class="au-control-input__input" type="radio"  name="id" id="id-immicard" value="id-immicard">
+						<span class="au-control-input__text casa-label-guidance"> ImmiCard<br />
+						<span class="form-text casa-form-guidance">(Evidence of Immigration Status; issued to some temporary visa holders in Australia)</span></span>
+				</label>				
+					
+					
+				<div class="au-form-group">
+								<p><a href="#">I don't have any of these documents</a></p>
+                    </div>-->
+                    <div id="direct">
+					<div class="au-form-group">
+			
+			
+            <a href="id-passport-foreign-details.html" class="au-btn au-btn--primary">Next</a>
+                        
+				
+
+            
+           
+            </div>
+                    </div>
+                    
+                    <div id="choice" style="display: none">
+					<div class="au-form-group">
+			<div id="validate">
+			
+            <a href="#" class="au-btn au-btn--primary">Next</a>
+                        </div>
+                        </div>
+				
+
+            
+           
+            </div>
+            <hr />
+            <a href="arn-saved.html" class="au-btn au-btn--secondary">
+            Save and exit application
+            </a>                 
+            </form>
+         </div>
+          </div>
+         </div>
+           </div>
+         </div>
+<div class="footer">
+<div class="banner">
+				<div class="container">
+					<div class="row">
+					 <div class="col-xs-12">
+				We are always looking for ways to improve our services. <a href="feedback.html">Please provide feedback on myCASA</a>.
+				</div>
+				</div>
+			</div>
+		</div>
+            <div class="footer-wrapper">
+               <iframe src="../mycasa-src-5.0/footer.html" frameborder="0" border="0" scrolling="no"></iframe>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>myCASA - ImmiCard details</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="initial-scale=1">
+      <link rel="stylesheet" href="../mycasa-src/css/furnace.min.css">
+      <link rel="stylesheet" href="../mycasa-src/css/casa.css">
+      <script type="text/javascript" src="../mycasa-src/js/furnace.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src/js/jquery.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src/js/jquery.js"></script>
+      <script type="text/javascript">
+         /* page specific js */
+         
+         $(document).ready(function() {
+         
+         var dob;
+         var dobObject;
+         
+		  function leadingZero(number){
+			  
+			  if(number.length==1){
+				  return "0"+number;
+			  } else {
+				  return number;
+			  }
+			
+			  
+		  }
+		  
+         function getDOB(){
+         
+         if($("#text-input-block1").val().length==1){
+         $("#text-input-block1").val("0"+$("#text-input-block1").val());
+         }
+         
+         if($("#text-input-block2").val().length==1){
+         $("#text-input-block2").val("0"+$("#text-input-block2").val());
+         }
+         
+         
+         var DD = 	$("#text-input-block1").val();
+         var MM = 	$("#text-input-block2").val();
+         var YYYY = 	$("#text-input-block3").val();
+         
+         dob = DD+"/"+MM+"/"+YYYY;
+         	
+         dobObject = new Date(YYYY+"-"+MM+"-"+DD);
+			          
+         }
+         
+        $('#validate a').bind("click", function() {
+			 getDOB();
+
+
+			 var given_names = $("#given-name-input").val();
+			 var family_name = $("#family-name-input").val();
+			 var immicard_number = $("#immicard_number").val();
+
+			 output = "GivenName|" + given_names + ";FamilyName|" + family_name + ";ImmiCardNumber|" + immicard_number + ";DateOfBirth|" + dob;
+				 console.log(output);
+
+				 return false;
+			});
+         });
+      </script>
+      <style type="text/css">
+         /* page specific css */
+         
+         
+         
+         #validate {
+		  display: block;
+		  }
+		  .form-sub-input {
+		  margin-left: 2.5em;
+		  }
+		  .panel .form-sub-input{
+		  opacity:0.5;
+		  }
+		  .panel.active .form-sub-input{
+		  opacity:1;
+		  }
+		   
+		  .date-limit{
+		  display:none;
+		  }
+		  .panel .au-control-input__input{
+		  display:block;
+		  height:0;
+		  width:0;
+		  }
+		   
+		   #date-limit span, .input-state{
+			   display:none;
+		   }
+         
+         
+      </style>
+   </head>
+   <body class="live-demo au-body au-grid">
+      <main class="au-grid">
+        <div class="header">
+            <div class="container">
+               <div class="row">
+               
+               
+               
+                  <div class="logo au-body au-body--dark">
+                     <a href="index.html"><img src="../mycasa-src/img/CASALOGO-white-i.svg"></a>
+                  </div>
+                  <div class="casa-menu">
+                  
+                  
+						<div class="au-body au-body--dark">
+                        <a class="au-btn au-btn--dark" href="signed-out.html">Sign out</a>
+                     </div>
+                  
+                  
+                  
+                  
+                  </div>
+                  
+                  
+                  
+                  
+                  
+               </div>
+            </div>
+         </div> <div class="body"><div class="banner">
+				<div class=container>
+					<div class="row">
+					 <div class="col-xs-12">
+				This service is currently in beta, we encourage you to <a href="feedback.html">provide feedback</a>
+				</div>
+				</div>
+			</div>
+		</div>
+            <div class="container">
+               <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                  <ul class="au-link-list au-link-list--inline">
+                     <li><a href="welcome.html">myCASA</a></li>
+                     <li>Aviation reference number application</li>
+                  </ul>
+               </nav>
+              
+               <header class="au-header" role="banner">
+                  <h1 class="break desktop au-header-heading">ImmiCard details</span>
+                  </h1>
+                  <a class="au-direction-link au-direction-link--left" href="mycasa.html">Back</a>
+               </header>
+               
+               
+               <div class="row">
+               	<div class="col-xs-12 col-md-12 col-lg-6">
+               
+               
+               
+               <label class="casa-label-guidance" for="family-name-input">Surname
+               <div class="casa-form-guidance">Please enter your family name (surname) as written on your ImmiCard</div>
+               <input class="au-text-input au-text-input--block" name="family-name-input" id="family-name-input" type="text" value="">
+               </label>
+               
+               <br>
+               <label class="casa-label-guidance" for="given-name-input">Given names
+               <div class="casa-form-guidance">Please enter all given names as written on your ImmiCard, including any middle names</div>
+               <input class="au-text-input au-text-input--block" name="given-name-input" id="given-name-input" type="text" value="">
+               </label>
+              
+               <br>
+               <div class="form-section date-entry">
+                  <p class="casa-label-guidance">Date of birth</p>
+                  <div class="casa-form-guidance">For example, 31 01 1990</div>
+                  <div class="date date-day">
+                     <label class="casa-label-guidance" for="text-input-block1" class="casa-form-guidance">Day</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="DD" id="text-input-block1" type="text" value="">
+                  </div>
+                  <div class="date date-month">
+                     <label class="casa-label-guidance" for="text-input-block2" class="casa-form-guidance">Month</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="MM" id="text-input-block2" type="text" value="">
+                  </div>
+                  <div class="date date-year">
+                     <label class="casa-label-guidance" for="text-input-block3" class="casa-form-guidance">Year</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="YYYY" id="text-input-block3" type="text" value="">
+                  </div>
+                  <br style="clear:both;" />
+               </div>
+               <br style="clear:both;" /> &nbsp;
+               <br />
+              
+					
+                  <label class="casa-label-guidance" for="r-vic-registration-number-input">
+                     ImmiCard number
+                     <div class="casa-form-guidance">
+                        Please enter your ImmiCard number exactly as it appears on your ImmiCard
+                     </div>
+                     <input class="au-text-input au-text-input--block" name="immicard_number" id="immicard_number" type="text" value="">
+                     
+                  </label>
+              
+           
+            <br />
+            <br style="clear:both" />
+
+			<div id="validate">
+				
+					<p class="au-callout" aria-label="Callout description1">
+				<label class="au-control-input">
+				  <input class="au-control-input__input" type="checkbox" name="checkbox-ex">
+				  <span class="au-control-input__text">
+				I confirm that I am authorised to provide the personal details presented and I consent to my  information being checked with the document issuer or official record holder via third party systems for the purpose of confirming your identity
+				</span>
+				</label>	
+				</p>
+				
+				<br />
+			
+            <a href="declaration.html" class="au-btn au-btn--primary">Next</a>
+            
+           
+            </div>
+            <hr />
+            <a href="arn-saved.html" class="au-btn au-btn--secondary">
+            Save and exit application
+            </a>                 
+            </form>
+         </div>
+          </div>
+         </div>
+           </div>
+         </div>
+         <div class="footer">
+            
+            <div class="footer-wrapper">
+               <iframe src="../mycasa-src/footer.html" frameborder="0" border="0" scrolling="no"></iframe>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>

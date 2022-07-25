@@ -1,0 +1,1102 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>myCASA - Birth certificate details</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="initial-scale=1">
+      <link rel="stylesheet" href="../mycasa-src/css/furnace.min.css">
+      <link rel="stylesheet" href="../mycasa-src/css/casa.css">
+      <script type="text/javascript" src="../mycasa-src/js/furnace.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src/js/jquery.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src/js/jquery.js"></script>
+      <script type="text/javascript">
+         /* page specific js */
+         
+         $(document).ready(function() {
+         
+         
+           var display = window.location.hash.substr(1);
+		  	if(display=="error"){
+			  $("#section_validation_panelAustralianBirthCertificate").css("display","block");
+			} else if (display=="error-final"){
+			  $("#section_validation_panelAustralianBirthCertificateFinal").css("display","block");
+			} else if(display=="dvs"){
+			  $("#dvs-outage").css("display","block");
+			}
+		  
+		  
+         var state;
+         var dob;
+         var dobObject;
+         
+		  function leadingZero(number){
+			  
+			  if(number.length==1){
+				  return "0"+number;
+			  } else {
+				  return number;
+			  }
+			
+			  
+		  }
+		  
+         function getDOB(){
+         
+         if($("#text-input-block1").val().length==1){
+         $("#text-input-block1").val("0"+$("#text-input-block1").val());
+         }
+         
+         if($("#text-input-block2").val().length==1){
+         $("#text-input-block2").val("0"+$("#text-input-block2").val());
+         }
+         
+         
+         var DD = 	$("#text-input-block1").val();
+         var MM = 	$("#text-input-block2").val();
+         var YYYY = 	$("#text-input-block3").val();
+         
+         dob = DD+"/"+MM+"/"+YYYY;
+         	
+         dobObject = new Date(YYYY+"-"+MM+"-"+DD);
+			          
+         }
+         
+         state = $("#select-state option:selected").val();
+         
+         if (state != 0) {
+         
+             $(".input-state").css("display", "none");
+             var showState = "#input-" + state;
+             $(showState).css("display", "block");
+             $("#validate").css("display", "block");
+         
+         }
+         
+         $('#select-state').bind("change", function() {
+         
+             state = $("#select-state option:selected").val();
+             $(".input-state").css("display", "none");
+         
+             //var showState = "#input-" + state;
+            // $(showState).css("display", "block");
+             $("#validate").css("display", "block");
+         
+         getDOB();
+         
+		var beforeDateLimit=false;
+			 
+         if(state=="nsw"){
+   
+         	var nswLimitDate = new Date("1914-01-01");	 
+			 if(dobObject < nswLimitDate){
+				 $("#nsw-date-limit").css("display","inline");
+				 $("#input-nsw").css("display","none");
+				 beforeDateLimit=true;
+
+			 } else {
+				  $("#input-nsw").css("display","block");
+			 }
+
+         
+         }
+         
+         if(state=="act"){
+     
+        	 var actLimitDate = new Date("1930-01-01");
+         
+			if(dobObject < actLimitDate){
+				 $("#act-date-limit").css("display","inline");
+				 $("#input-act").css("display","none");
+				beforeDateLimit=true;
+
+			 } else {
+				  $("#input-act").css("display","block");
+			 }
+
+         
+         }
+         
+         if(state=="nt"){
+        
+        	 var ntLimitDate = new Date("1870-01-01");
+         
+			if(dobObject < ntLimitDate){
+					 $("#nt-date-limit").css("display","inline");
+					 $("#input-nt").css("display","none");
+					 beforeDateLimit=true;
+				 } else {
+					  $("#input-nt").css("display","block");
+				 }
+
+         
+         }		
+         
+         if(state=="sa"){
+         
+       	  var saLimitDate = new Date("1944-01-01");
+     	  if(dobObject < saLimitDate){
+				 $("#sa-date-limit").css("display","inline");
+				 $("#input-sa").css("display","none");
+				 beforeDateLimit=true;
+			 } else {
+				  $("#input-sa").css("display","block");
+			 }
+
+         
+         }	
+         
+         if(state=="wa"){
+         
+        	 var waLimitDate = new Date("1841-01-01");
+         
+			if(dobObject < waLimitDate){
+				 $("#wa-date-limit").css("display","inline");
+				 $("#input-wa").css("display","none");
+				 beforeDateLimit=true;
+			 } else {
+				  $("#input-wa").css("display","block");
+			 }
+
+         
+         }	
+         
+         
+         if(state=="vic"){
+         
+       		var vicLimitDate = new Date("1929-01-01");
+       		if(dobObject < vicLimitDate){
+				 $("#vic-date-limit").css("display","inline");
+				 $("#input-vic").css("display","none");
+				 beforeDateLimit=true;
+			 } else {
+				  $("#input-vic").css("display","block");
+			 }
+
+         
+         }				
+         
+         if(state=="tas"){
+         
+       		  var tasLimitDate = new Date("1970-01-01");
+         
+       		 if(dobObject < tasLimitDate){
+				 $("#tas-date-limit").css("display","inline");
+				 $("#input-tas").css("display","none");
+				 beforeDateLimit=true;
+			 } else {
+				  $("#input-tas").css("display","block");
+			 }
+
+         
+         }
+         
+         if(state=="qld"){
+         
+        
+         
+			 var qldLimitDate = new Date("1941-01-01");
+
+			 if(dobObject < qldLimitDate){
+				 $("#qld-date-limit").css("display","inline");
+				 $("#input-qld").css("display","none");
+				 beforeDateLimit=true;
+			 } else {
+				  $("#input-qld").css("display","block");
+			 }
+
+         
+         }
+			 
+			 
+			 
+		if(beforeDateLimit==true){
+			
+			$("#date-limit").css("display","block");
+			
+			 $([document.documentElement, document.body]).animate({
+						  	scrollTop: 0
+    					}, 500);
+			
+			
+		}
+         
+         
+         });
+         
+         
+         $('.panel input').bind("click", function() {
+         
+         var inputStateActive = "#input-"+state+" .panel.active";
+         
+         
+         
+         $(inputStateActive).attr("class","panel");
+         
+         var parentPanel = $(this.parentNode.parentNode);
+         if(parentPanel.attr("class")!="panel"){
+         parentPanel = $(this.parentNode.parentNode.parentNode.parentNode.parentNode);
+         }
+         
+         parentPanel.addClass("active");
+         
+         var inputStateActiveRadio = "#input-"+state+" .panel.active input[type=radio]";
+         
+         $(inputStateActiveRadio).prop("checked","checked");
+         
+         
+         
+         });
+         
+		  
+		 $('#r-wa-registration-number-input').bind("blur", function() {
+		  
+		  registration_number = $("#r-wa-registration-number-input").val();
+				
+			 
+			 var slashLength = 0;
+				 
+			 if(registration_number.match(/\//ig)){
+				slashLength = registration_number.match(/\//ig).length;
+			 }
+         
+         
+			 if(slashLength < 2){
+         
+				 // check year - if YY, then initiate district request
+				 var slash = registration_number.indexOf("/");
+				 var year = registration_number.substring(slash + 1, registration_number.length);
+				 
+				 if(year.length==2){
+					 
+					 $('#r-wa-registration-district').fadeIn("slow");
+					 //$('#r-wa-registration-district').scrollTo();
+					 $('#r-wa-registration-district-select').focus();
+					 
+					 /*
+					  $([document.documentElement, document.body]).animate({
+						  	scrollTop: $("#r-wa-registration-district").offset().top
+    					}, 500);
+					 */
+					 
+					 
+				 } else {
+					 
+					 $('#r-wa-registration-district').css("display","none");
+					 
+				 }
+				 
+				 
+			 }
+		 });
+		  
+         
+         $('#validate a').bind("click", function() {
+         
+             var given_names = $("#given-name-input").val();
+             var family_name = $("#family-name-input").val();
+             var registration_number = "";
+             var registration_date = "";
+             var registration_year = "";
+             var certificate_number = "";
+         
+         
+             var output = "";
+         
+         
+         // ACT
+         
+             if (state == "act") {
+                 // hey I'm a territory!
+         
+                // Registration number with no year
+				registration_number = $("#r-act-registration-number-input").val();
+
+				var slash = registration_number.indexOf("/");
+
+			 	// check for slash / year in older format NNNNNN/YYYY
+			 	if(slash > 0){
+					var act_reg_number = registration_number.substring(slash+1,registration_number.length);
+					registration_number = act_reg_number;
+				}
+         
+             }
+         
+         
+         // NT
+         
+             if (state == "nt") {
+                 // hey I'm a territory too!
+         
+         
+				 registration_number = $("#r-nt-registration-number-input").val();
+				 
+				 var slash = registration_number.lastIndexOf("/");
+
+			 	// check for slash and if present grab last numbers after it 
+			 	if(slash > 0){
+					var nt_reg_number = registration_number.substring(slash+1,registration_number.length);
+					registration_number = nt_reg_number;
+				}	
+				 
+				 
+                  
+         
+         
+             }
+         
+         // NEW SOUTH WALES
+         
+         if (state == "nsw") {
+
+			 
+			 	// Registration number with no year
+				registration_number = $("#r-nsw-registration-number-input").val();
+
+				var slash = registration_number.indexOf("/");
+
+			 	// check for slash / year in latest format NNNNNN/YYYY
+			 	if(slash > 0){
+					var nsw_reg_number = registration_number.substring(0,slash);
+					registration_number = nsw_reg_number;
+				}
+
+			 	// TBC: older styles with YYYY/NNNNNN
+			 
+
+         
+         
+             }
+         
+         // SOUTH AUSTRALIA
+         
+             if (state == "sa") {
+         
+         		registration_number = $("#r-sa-registration-number-input").val();
+         
+             }
+         
+         
+         // TASMANIA
+         
+         
+         if (state == "tas") {
+         
+         
+   					// registration date
+        
+                     var monthValue = 	leadingZero($("#r-tas-registration-date-mm").val());
+                     var yearValue = 	leadingZero($("#r-tas-registration-date-yyyy").val());
+                     var dateValue = 	leadingZero($("#r-tas-registration-date-dd").val());
+				 
+         
+                     registration_date = dateValue+"/"+monthValue+"/"+yearValue;
+						 			 
+					// registration_date = yearValue + "-" + monthValue + "-" + dateValue;
+         }
+         
+         
+         // QUEENSLAND
+         
+         if (state == "qld") {
+         
+                     // registration date
+        
+                     var monthValue = 	leadingZero($("#r-qld-registration-date-mm").val());
+                     var yearValue = 	leadingZero($("#r-qld-registration-date-yyyy").val());
+                     var dateValue = 	leadingZero($("#r-qld-registration-date-dd").val());
+				 
+         
+                     registration_date = dateValue+"/"+monthValue+"/"+yearValue;
+						 
+					// registration_date = yearValue + "-" + monthValue + "-" + dateValue;
+         
+		 
+           }
+         
+         
+         // WESTERN AUSTRALIA
+         
+         if (state == "wa") {
+         
+         	registration_number = $("#r-wa-registration-number-input").val();
+				
+			 
+			 var slashLength = 0;
+				 
+			 if(registration_number.match(/\//ig)){
+				slashLength = registration_number.match(/\//ig).length;
+			 }
+         
+         
+			 if(slashLength < 2){
+         
+				 // check year - if YY, then initiate district request
+				 var slash = registration_number.indexOf("/");
+				 
+				 // if no slash present, make number just number
+				 if(slash==-1){
+					 slash = registration_number.length;
+				 }
+				 
+				 var year = registration_number.substring(slash + 1, registration_number.length);
+				 var number = registration_number.substring(0, slash);
+				 				 
+				 if(year.length==2 || number.length < 7){
+					 
+					 
+					//...
+
+				 	var increaseBy = 5 - number.length;
+
+				 	while (increaseBy--) {
+
+				 		number = "0" + number;
+
+				 	}
+					 
+					 
+					 registration_number = $('#r-wa-registration-district-select').val() +""+ number;
+					 
+				 } else {
+					 registration_number = registration_number.substr(0,7);
+				 }
+				 
+				 
+				 
+         		
+         
+				 
+				 
+				 
+				 
+				 
+         	
+				 
+			 } else if(slashLength => 2) {
+         
+				 var slash = registration_number.indexOf("/");
+				 var district = registration_number.substring(0, slash);
+				 var number = registration_number.substring(slash + 1, registration_number.length);
+				 number = number.substring(0, number.indexOf("/"));
+
+				 // append to have extra 0 if needed
+					 if (district.length == 1) {
+
+					 	district = "0" + district;
+					 }
+
+				 if (number.length < 6) {
+
+				 	var increaseBy = 5 - number.length;
+
+				 	while (increaseBy--) {
+
+				 	number = "0" + number;
+
+				 }
+         
+         		}
+         
+				 
+				 
+				 registration_number = district+""+number;
+				 
+				
+				 
+				 
+				 
+				 
+				 
+         
+         }
+         
+			 
+			  // final append check
+			 				 
+			 	registration_number = registration_number.replace(/\D/g,'');
+				 if(registration_number.length < 7){
+					 
+					 
+					 var increaseBy = 7 - registration_number.length;
+					 
+					 
+				 		while (increaseBy--) {
+
+							registration_number = "0" + registration_number;
+					 
+					 
+						}
+				 }
+         		
+         
+         
+            // VICTORIA
+         
+             } else if (state == "vic") {
+         
+
+				 registration_number = $("#r-vic-registration-number-input").val();
+				 var slash = registration_number.indexOf("/");
+
+				 registration_year = registration_number.substr(slash+1,registration_number.length);
+				 registration_year = registration_year.substr(0,4);
+
+				 if(slash > 0){
+				 registration_number = registration_number.substr(0,slash);
+				 }
+				 
+				 // append for older certificates with just YY
+				 if(registration_year.length==2){
+					 registration_year = "19"+registration_year;
+				 }
+         
+         
+         
+         }
+         
+         
+         getDOB();
+			 
+		// some final cleaning on Registration number
+		registration_number = registration_number.replace(".",registration_number);
+		registration_number = registration_number.replace(/\D/g,'');
+         
+             output = "GivenName|" + given_names + ";FamilyName|" + family_name + ";RegistrationNumber|" + registration_number + ";RegistrationDate|" + registration_date + ";RegistrationState|" + state.toUpperCase() + ";RegistrationYear|" + registration_year + ";DatePrinted|;CertificateNumber|" + certificate_number + ";DateOfBirth|" + dob;
+             console.log(output);
+         
+             return false;
+         
+         });
+         });
+      </script>
+      <style type="text/css">
+         /* page specific css */
+         
+         
+         
+         #validate {
+		  display: block;
+		  }
+		  .form-sub-input {
+		  margin-left: 2.5em;
+		  }
+		  .panel .form-sub-input{
+		  opacity:0.5;
+		  }
+		  .panel.active .form-sub-input{
+		  opacity:1;
+		  }
+		   
+		  .date-limit{
+		  display:none;
+		  }
+		  .panel .au-control-input__input{
+		  display:block;
+		  height:0;
+		  width:0;
+		  }
+		   
+		   #date-limit span, .input-state{
+			   display:none;
+		   }
+         
+         
+      </style>
+   </head>
+   <body class="live-demo au-body au-grid">
+      <main class="au-grid">
+         <div class="header">
+            <div class="container">
+               <div class="row">
+               
+               
+               
+                  <div class="logo au-body au-body--dark">
+                     <a href="index.html"><img src="../mycasa-src/img/CASALOGO-white-i.svg"></a>
+                  </div>
+                  <div class="casa-menu">
+                  
+                  
+					 	<div class="au-body au-body--dark">
+                        <a class="au-btn au-btn--dark" href="signed-out.html">Sign out</a>
+                     </div>
+                  
+                  
+                  
+                  
+                  </div>
+                  
+                  
+                  
+                  
+                  
+               </div>
+            </div>
+         </div> <div class="body"><div class="banner">
+				<div class=container>
+					<div class="row">
+					 <div class="col-xs-12">
+				This service is currently in beta, we encourage you to <a href="feedback.html">provide feedback</a>
+				</div>
+				</div>
+			</div>
+		</div>
+            <div class="container">
+               <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                  <ul class="au-link-list au-link-list--inline">
+                     <li><a href="welcome.html">myCASA</a></li>
+                     <li>Aviation reference number application</li>
+                  </ul>
+               </nav>
+				<div class="row">
+					<div class="col-xs-12">
+						
+					<div class="row">
+					<div class="col-xs-12 col-lg-12">
+						
+						
+						
+	 <div id="dvs-outage" style="display: none;">
+                  <div id="validation-error">
+                     <div class="au-body au-page-alerts au-page-alerts--error" id="error_message_panelAustralianBirthCertificate" style="display: none;">
+                        <h3>Verification outage for NSW birth certificates</h3>
+                     </div>
+                     <div class="au-body au-page-alerts au-page-alerts--success" id="success_message_panelAustralianBirthCertificate" style="display:none;"></div>
+                     <div class="au-body au-page-alerts au-page-alerts--warning" id="warning_message_panelAustralianBirthCertificate" style="">
+						 
+						 <div class="row">
+					<div class="col-xs-12 col-lg-9">
+						 
+                        <h3>Please note that NSW birth certificates cannot be verified between 08:00am and 16:00pm on 25th April 2019.</h3>
+                        <p>Alternatively you can <a href="#" onclick="javascript: returnToPOIPrimarySelection ();">return to the previous screen</a> and select a different form of primary identification. Or <a href="#" onclick="javascript: enableAndNavigateToUploadPanel ('panelAustralianBirthCertificate', 'Australian Birth Certificate');">upload a certified copy of your documentation</a> for manual verification.</p>
+                     </div>
+                  </div>
+               </div>
+					</div>	
+						</div>					
+						
+						
+						
+						<div id="section_validation_panelAustralianBirthCertificateFinal" style="display: none;">
+                  <div id="validation-error">
+                     <br />
+                     
+					  <div role="alert" class="au-body au-page-alerts au-page-alerts--warning">
+  <h3>We have been unable to verify your document</h3>
+					<p>
+You can <a href="#">return to the previous screen</a> and select a different form of secondary identification. <br><br>
+						Otherwise you must <a href="#">upload a copy of your documentation</a> for manual verification.</p>
+</div>
+					  
+					  
+                    
+                  </div>
+			 </div>
+		</div>
+			</div>			
+						
+						
+               <div id="section_validation_panelAustralianBirthCertificate" style="display: none;">
+                  <div id="validation-error">
+                     <div class="au-body au-page-alerts au-page-alerts--error" id="error_message_panelAustralianBirthCertificate" style="display: none;">
+                        <h3>There was a problem submitting the form</h3>
+                        <p>Please check the form again before proceeding</p>
+                     </div>
+                     <div class="au-body au-page-alerts au-page-alerts--success" id="success_message_panelAustralianBirthCertificate" style="display:none;"></div>
+                     <div class="au-body au-page-alerts au-page-alerts--warning" id="warning_message_panelAustralianBirthCertificate" style="">
+						 
+						 <div class="row">
+					<div class="col-xs-12 col-lg-9">
+						 
+                        <h3>There was a problem verifying your birth certificate.</h3>
+						
+						
+						
+						
+						
+						<p>Please review your details and try again.</p>
+						
+						<p>
+							
+							If you have any <strong>middle names</strong>, please ensure they are entered as they appear on your document.</p>
+						
+						<p>
+							
+							
+							You have <b>4 attempts</b> remaining.</p>
+						
+						
+						
+						
+                        <p>Alternatively you can <a href="#" onclick="javascript: returnToPOIPrimarySelection ();">return to the previous screen</a> and select a different form of primary identification. Or <a href="#" onclick="javascript: enableAndNavigateToUploadPanel ('panelAustralianBirthCertificate', 'Australian Birth Certificate');">upload a certified copy of your documentation</a> for manual verification.</p>
+                     </div>
+                  </div>
+               </div>
+					  
+					  
+					  
+					  
+					</div>	
+						</div>
+				</div>	
+				</div>
+					
+					
+               <div id="date-limit" style="display:none;">
+                  <div class="au-body au-page-alerts au-page-alerts--warning" id="warning_message_panelAustralianBirthCertificate" style="">
+                     <h3>Unfortunately we are unable to verify your birth certificate</h3>
+                     <p>We are unable to verify 
+                        <span id="nsw-date-limit">
+                        New South Wales birth certificates before 1 January 1914.
+                        </span>
+                        <span id="tas-date-limit">
+                        Tasmanian birth certificates before 1 January 1970.
+                        </span>
+                        <span id="wa-date-limit">
+                        Western Australian birth certificates before 1 January 1841.
+                        </span>
+                        <span id="qld-date-limit">
+                        Queensland birth certificates before 1 January 1941.
+                        </span>
+                        <span id="vic-date-limit">
+                        Victorian birth certificates before 1 January 1929.
+                        </span>
+                        <span id="act-date-limit">
+                        Australian Capital Territory birth certificates before 1 January 1930.
+                        </span>
+                        <span id="sa-date-limit">
+                        South Australian birth certificates before 1 January 1944.
+                        </span>
+                        <span id="nt-date-limit">
+                        Northern Territory birth certificates before 1 January 1870.
+                        </span>
+                     </h3>
+                     </p>
+                     <p>You can <a href="#" onclick="javascript: returnToPOIPrimarySelection ();">return to the previous screen</a> and select a different form of primary identification or <a href="#" onclick="javascript: enableAndNavigateToUploadPanel ('panelAustralianBirthCertificate', 'Australian Birth Certificate');">upload a certified copy of your birth certificate</a> for manual verification.</p>
+                  </div>
+               </div>
+               <header class="au-header" role="banner">
+                  <h1 class="break desktop au-header-heading">Australian birth certificate details</span>
+                  </h1>
+                  <a class="au-direction-link au-direction-link--left" href="mycasa.html">Back</a>
+               </header>
+               
+               
+               <div class="row">
+               	<div class="col-xs-12 col-md-12 col-lg-6">
+               
+               
+               
+               <label class="casa-label-guidance" for="family-name-input">Family name
+               <div class="casa-form-guidance">Please enter your family name (surname) as written on your birth certificate</div>
+               <input class="au-text-input au-text-input--block" name="family-name-input" id="family-name-input" type="text" value="">
+               </label>
+               
+               <br>
+               <label class="casa-label-guidance" for="given-name-input">Given names
+               <div class="casa-form-guidance">Please enter all given names as written on your birth certificate, including any middle names</div>
+               <input class="au-text-input au-text-input--block" name="given-name-input" id="given-name-input" type="text" value="">
+               </label>
+              
+               <br>
+               <div class="form-section date-entry">
+                  <p class="casa-label-guidance">Date of birth</p>
+                  <div class="casa-form-guidance">For example, 31 01 1990</div>
+                  <div class="date date-day">
+                     <label class="casa-label-guidance" for="text-input-block1" class="casa-form-guidance">Day</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="DD" id="text-input-block1" type="text" value="">
+                  </div>
+                  <div class="date date-month">
+                     <label class="casa-label-guidance" for="text-input-block2" class="casa-form-guidance">Month</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="MM" id="text-input-block2" type="text" value="">
+                  </div>
+                  <div class="date date-year">
+                     <label class="casa-label-guidance" for="text-input-block3" class="casa-form-guidance">Year</label>
+                     <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="YYYY" id="text-input-block3" type="text" value="">
+                  </div>
+                  <br style="clear:both;" />
+               </div>
+               <br style="clear:both;" /> &nbsp;
+               <br />
+               <label class="casa-label-guidance" for="select-state">State or territory of birth
+               <div class="casa-form-guidance">This is the state or territory where your birth was registered as indicated on your certificate</div>
+               <select id="select-state" class="au-select au-select--block">
+                  <option value="0">Please select</option>
+                  <option value="act">Australian Capital Territory</option>
+                  <option value="nsw">New South Wales</option>
+                  <option value="nt">Northern Territory</option>
+                  <option value="sa" >South Australia</option>
+                  <option value="tas">Tasmania</option>
+                  <option value="qld">Queensland</option>
+                  <option value="vic">Victoria</option>
+                  <option value="wa">Western Australia</option>
+               </select>
+               </label>
+               <br />
+               <br />
+               <br />
+               <!-- ACT -->
+               <div id="input-act" class="input-state">
+                  <label class="casa-label-guidance" for="r-act-registration-number-input">Registration number</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Registration number exactly as it appears on your birth certificate, including any slashes
+                  </div>
+                  <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-act-registration-number-input" type="text" value="">
+                  <br />
+                  <div class="casa-form-guidance">
+                     Depending on your birth certificate type, your Registration number may appear in different places. 
+                  </div>
+                  <ul class="casa-form-guidance">
+                     <li>Most ACT birth certificates will have the Registration number in the last section of the certificate under "Registration"
+                     <li>It may also appear in a box on the top right of the certificate</li>
+                  </ul>
+                  </label>
+               </div>
+               <!-- NSW -->
+               <div id="input-nsw" class="input-state">
+                  <label class="casa-label-guidance" for="r-nsw-registration-number-input">Registration number</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Registration number exactly as it appears on your birth certificate, including any slashes
+                  </div>
+                  <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-nsw-registration-number-input" type="text" value="">
+                  <br />
+                  <div class="casa-form-guidance">
+                     Depending on your birth certificate type, your Registration number may appear in different places. 
+                  </div>
+                  <ul class="casa-form-guidance">
+                     <li>Most NSW birth certificates will have the Registration number in a box on the top right of the certificate</li>
+                     <li>It may also be labelled as 'No. in Register' or simply 'number' next to 'Particulars of registration'</li>
+                  </ul>
+                  </label>
+               </div>
+               <!-- NT -->
+               <div id="input-nt" class="input-state">
+                  <label class="casa-label-guidance" for="r-nt-registration-number-input">Registration number</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Registration number exactly as it appears on your birth certificate, including any slashes or letters
+                  </div>
+                  <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-nt-registration-number-input" type="text" value="">
+                  <br />
+                  <div class="casa-form-guidance">
+                     Depending on your birth certificate type, your Registration number may appear in different places. 
+                  </div>
+                  <ul class="casa-form-guidance">
+                     <li>Most Northern Territory birth certificates will have the Registration number in the last section of the certificate under "Registration"</li>
+                     <li>It may appear in a box on the top right of the certificate, or next to 'Copy of entry no.' or 'Number in register'</li>
+                  </ul>
+               </div>
+               <!-- QLD -->
+               <div id="input-qld" class="input-state">
+                  <label>Date of registration</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Date of registration in numeric format; for example 14 02 1990. This can be found in the "Registrar" section towards the bottom of your birth certificate.
+                  </div>
+                  <div class="form-section date-entry" style="margin-top:0.75em;padding-top:0;">
+                     <div class="date date-day">
+                        <label class="casa-label-guidance" for="r-qld-registration-date-dd" class="casa-form-guidance">Day</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="DD" id="r-qld-registration-date-dd" type="text" value="">
+                     </div>
+                     <div class="date date-month">
+                        <label class="casa-label-guidance" for="r-qld-registration-date-mm" class="casa-form-guidance">Month</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="MM" id="r-qld-registration-date-mm" type="text" value="">
+                     </div>
+                     <div class="date date-year">
+                        <label class="casa-label-guidance" for="r-qld-registration-date-yyyy" class="casa-form-guidance">Year</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="YYYY" id="r-qld-registration-date-yyyy" type="text" value="">
+                     </div>
+                  </div>
+               </div>
+               <!-- SA -->
+               <div id="input-sa" class="input-state">
+                  <label class="casa-label-guidance" for="r-sa-registration-number-input">Registration number</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Registration number exactly as it appears on your birth certificate
+                  </div>
+                  <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-sa-registration-number-input" type="text" value="">
+                  <br />
+                  <div class="casa-form-guidance">
+                     Depending on your birth certificate type, your Registration number may appear in different places. 
+                  </div>
+                  <ul class="casa-form-guidance">
+                     <li>Most South Australian birth certificates will have the Registration number in the last section of the certificate under "Registration"
+                     <li>Older birth certificates may have the Registration number on the top right or bottom right of the certificate</li>
+                  </ul>
+               </div>
+               <!-- TAS -->
+               <div id="input-tas" class="input-state">
+                  <label>Date of registration</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Date of registration in numeric format; for example 14 02 1990. This can be found in the "Date registered" section towards the bottom of your birth certificate.
+                  </div>
+                  <div class="form-section date-entry" style="margin-top:0.75em;padding-top:0;">
+                     <div class="date date-day">
+                        <label class="casa-label-guidance" for="r-tas-registration-date-dd" class="casa-form-guidance">Day</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="DD" id="r-tas-registration-date-dd" type="text" value="">
+                     </div>
+                     <div class="date date-month">
+                        <label class="casa-label-guidance" for="r-tas-registration-date-mm" class="casa-form-guidance">Month</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="MM" id="r-tas-registration-date-mm" type="text" value="">
+                     </div>
+                     <div class="date date-year">
+                        <label class="casa-label-guidance" for="r-tas-registration-date-yyyy" class="casa-form-guidance">Year</label>
+                        <input class="au-text-input au-text-input--block" name="text-input-block" placeholder="YYYY" id="r-tas-registration-date-yyyy" type="text" value="">
+                     </div>
+                  </div>
+               </div>
+               <!-- WA -->
+               <div id="input-wa" class="input-state">
+                  <label class="casa-label-guidance" for="r-wa-registration-number-input">Registration number</label>
+                  <div class="casa-form-guidance">
+                     Please enter your Registration number exactly as it appears on your birth certificate, including any slashes or letters
+                  </div>
+                  <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-wa-registration-number-input" type="text" value="">
+                  <br />
+                  <div class="casa-form-guidance">
+                     Depending on your birth certificate type, your Registration number may appear in different places. 
+                  </div>
+                  <ul class="casa-form-guidance">
+                     <li>Most Western Australian birth certificates will have the Registration number in a box on the top right of the certificate</li>
+                     <li>Older birth certificates may have the Registration number at the top of the certificate in first column or section of the certificate details</li>
+                  </ul>
+                  <div id="r-wa-registration-district" style="display:none;">
+                     <br /><br />
+                     <label class="casa-label-guidance" for="r-wa-registration-number-input">Registration district</label>
+                     <div class="casa-form-guidance">
+                        You appear to have an older-style birth certificate which will require you to select the registration district shown on your birth certificate
+                     </div>
+                     <select id="r-wa-registration-district-select" class="au-select au-select--block">
+                        <option value="02">Albany</option>
+                        <option value="03">Ashburton</option>
+                        <option value="04">Beverley</option>
+                        <option value="06">Black Range</option>
+                        <option value="05">Blackwood</option>
+                        <option value="07">Boulder</option>
+                        <option value="08">Bow River</option>
+                        <option value="09">Bowes</option>
+                        <option value="10">Broad Arrow</option>
+                        <option value="11">Broome</option>
+                        <option value="12">Bruce Rock</option>
+                        <option value="13">Bunbury</option>
+                        <option value="14">Canning</option>
+                        <option value="15">Champion Bay</option>
+                        <option value="16">Claremont</option>
+                        <option value="17">Coolgardie</option>
+                        <option value="21">Cottesloe</option>
+                        <option value="22">Dandaragan</option>
+                        <option value="23">Dongara</option>
+                        <option value="24">Dundas</option>
+                        <option value="18">East Coolgardie</option>
+                        <option value="36">East Kimberley</option>
+                        <option value="45">East Murchison</option>
+                        <option value="25">Esperance</option>
+                        <option value="26">Eucla</option>
+                        <option value="27">Fremantle</option>
+                        <option value="28">Gascoyne</option>
+                        <option value="29">Geraldton</option>
+                        <option value="30">Gingin</option>
+                        <option value="31">Greenough</option>
+                        <option value="32">Guildford</option>
+                        <option value="33">Irwin</option>
+                        <option value="34">Jarrahdale</option>
+                        <option value="35">Katanning</option>
+                        <option value="38">Kimberley Goldfields</option>
+                        <option value="39">Leederville</option>
+                        <option value="40">Melbourne</option>
+                        <option value="41">Merredin</option>
+                        <option value="42">Moora</option>
+                        <option value="43">Mount Margaret</option>
+                        <option value="44">Murchison</option>
+                        <option value="46">Murchison Goldfields</option>
+                        <option value="47">Murray</option>
+                        <option value="48">Newcastle</option>
+                        <option value="19">North Coolgardie</option>
+                        <option value="20">North-East Coolgardie</option>
+                        <option value="49">Northam</option>
+                        <option value="50">Northampton</option>
+                        <option value="51">Peak Hill</option>
+                        <option value="01" selected>Perth</option>
+                        <option value="52">Phillips River</option>
+                        <option value="53">Pilbara</option>
+                        <option value="54">Plantagenet</option>
+                        <option value="55">Port Hedland</option>
+                        <option value="56">Roebourne</option>
+                        <option value="57">Serpentine</option>
+                        <option value="58">Sharks Bay</option>
+                        <option value="59">Subiaco</option>
+                        <option value="60">Sussex</option>
+                        <option value="61">Swan</option>
+                        <option value="62">Toodyay</option>
+                        <option value="63">Vasse</option>
+                        <option value="64">Victoria</option>
+                        <option value="65">Victoria Plains</option>
+                        <option value="66">Wellington</option>
+                        <option value="37">West Kimberley</option>
+                        <option value="67">Williams</option>
+                        <option value="68">Wyndham</option>
+                        <option value="69">Yalgoo</option>
+                        <option value="70">Yilgarn</option>
+                        <option value="71">York</option>
+                        <option value="72">Christmas Island</option>
+                        <option value="73">Cocos Island</option>
+                     </select>
+                  </div>
+               </div>
+               <!-- VIC -->
+               <div id="input-vic" class="input-state">
+                  <label class="casa-label-guidance" for="r-vic-registration-number-input">
+                     Registration number
+                     <div class="casa-form-guidance">
+                        Please enter your Registration number exactly as it appears on your birth certificate, including slashes
+                     </div>
+                     <input class="au-text-input au-text-input--block" name="registration-number-input" id="r-vic-registration-number-input" type="text" value="">
+                     <br />
+                     <div class="casa-form-guidance">
+                        Depending on your birth certificate type, your Registration number may appear in different places. 
+                     </div>
+                     <ul class="casa-form-guidance">
+                        <li>Most Victorian birth certificates will have the Registration number in a box on the top right of the certificate</li>
+                        <li>It may also be labelled as 'No.' on older certificates</li>
+                     </ul>
+                  </label>
+               </div>
+           
+            <br />
+            <br style="clear:both" />
+
+			<div id="validate">
+			
+			<p class="au-callout" aria-label="Callout description1">
+				<label class="au-control-input">
+				  <input class="au-control-input__input" type="checkbox" name="checkbox-ex">
+				  <span class="au-control-input__text">
+				I confirm that I am authorised to provide the personal details presented and I consent to my  information being checked with the document issuer or official record holder via third party systems for the purpose of confirming your identity
+				</span>
+				</label>	
+				</p>
+				
+				<br />	
+				
+            <a href="declaration.html" class="au-btn au-btn--primary">Next</a>
+            
+           
+            </div>
+            <hr />
+            <a href="arn-saved.html" class="au-btn au-btn--secondary">
+            Save and exit application
+            </a>                 
+            </form>
+         </div>
+          </div>
+         </div>
+           </div>
+         </div>
+         <div class="footer">
+            
+            <div class="footer-wrapper">
+               <iframe src="../mycasa-src/footer.html" frameborder="0" border="0" scrolling="no"></iframe>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>
